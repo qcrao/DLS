@@ -11,6 +11,34 @@ public class Query_Arg_TwoNodes extends Query_Arg implements Cloneable{
     int srcRegionID = -1, dstRegionID = -1;
     String srcCountryCode = "", dstCountryCode = "";
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Query_Arg_TwoNodes)) return false;
+        if (!super.equals(o)) return false;
+
+        Query_Arg_TwoNodes that = (Query_Arg_TwoNodes) o;
+
+        if (srcPortID != that.srcPortID) return false;
+        if (dstPortID != that.dstPortID) return false;
+        if (srcRegionID != that.srcRegionID) return false;
+        if (dstRegionID != that.dstRegionID) return false;
+        if (!srcCountryCode.equals(that.srcCountryCode)) return false;
+        return dstCountryCode.equals(that.dstCountryCode);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + srcPortID;
+        result = 31 * result + dstPortID;
+        result = 31 * result + srcRegionID;
+        result = 31 * result + dstRegionID;
+        result = 31 * result + srcCountryCode.hashCode();
+        result = 31 * result + dstCountryCode.hashCode();
+        return result;
+    }
+
     public Query_Arg_TwoNodes(String[] args_pair)
     {
         super();
@@ -58,34 +86,6 @@ public class Query_Arg_TwoNodes extends Query_Arg implements Cloneable{
 
     public Query_Arg_TwoNodes(int year, int month) {
         super(year, month);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Query_Arg_TwoNodes)) return false;
-        if (!super.equals(o)) return false;
-
-        Query_Arg_TwoNodes that = (Query_Arg_TwoNodes) o;
-
-        if (srcPortID != that.srcPortID) return false;
-        if (dstPortID != that.dstPortID) return false;
-        if (srcRegionID != that.srcRegionID) return false;
-        if (dstRegionID != that.dstRegionID) return false;
-        if (!srcCountryCode.equals(that.srcCountryCode)) return false;
-        return dstCountryCode.equals(that.dstCountryCode);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + srcPortID;
-        result = 31 * result + dstPortID;
-        result = 31 * result + srcRegionID;
-        result = 31 * result + dstRegionID;
-        result = 31 * result + srcCountryCode.hashCode();
-        result = 31 * result + dstCountryCode.hashCode();
-        return result;
     }
 
     @Override

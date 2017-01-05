@@ -15,9 +15,10 @@ public class ShareData {
     private static final int ITEMS_PERTIME = 250000;
     private long items_totalNum = 0;
 
-    private String tableName = "l2_port_port_journey_2015_indian";
+    private String tableName = "l2_port_port_journey_indian";
     // private String tableName = "tmp";
 
+    private String rule = " where Ship_Dead_Weight_Tonnage > 0 and ClassType = 0 ";
     private String sql = "SELECT World_port_index_number_src,\n" +
             "    World_port_index_number_dst,\n" +
             "    Start_Datetime,\n" +
@@ -32,20 +33,20 @@ public class ShareData {
             "    Region_Index_Src,\n" +
             "    Region_Index_Dst,\n" +
             "    Ship_Dead_Weight_Tonnage\n" +
-            "FROM dls." + tableName;
+            "FROM dls." + tableName + rule;
 
     private void getData()
     {
         Calendar calendar = Calendar.getInstance();
 
-        String sql_itemNums = "select count(*) from " + tableName;
+        String sql_itemNums = "select count(*) from " + tableName + rule;
 
         ResultSet res_itemNums = db.query(sql_itemNums);
         try {
             while (res_itemNums.next())
             {
                 items_totalNum = res_itemNums.getLong(1);
-                System.out.println("get " + items_totalNum + " rows data!");
+                System.out.println("Loading " + items_totalNum + " rows data...");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,7 +84,7 @@ public class ShareData {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            offset += items_totalNum;
+            offset += ITEMS_PERTIME;
         }
     }
 

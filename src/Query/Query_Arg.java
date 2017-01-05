@@ -96,7 +96,7 @@ public abstract class Query_Arg implements Cloneable{
             return false;
         }
         else
-            System.err.println("month input error!");
+            System.err.println("throughputType input error!");
         return true;
     }
 

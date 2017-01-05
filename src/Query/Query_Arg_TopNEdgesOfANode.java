@@ -102,22 +102,22 @@ public class Query_Arg_TopNEdgesOfANode extends Query_Arg implements Cloneable{
         switch ((throughputType-1)*3 + dstNodeType)
         {
             case 1:
-                res = new PortRegion_DstNode(port_port_journey.getWorld_port_index_number_src());
+                res = new Port_DstNode(port_port_journey.getWorld_port_index_number_src());
                 break;
             case 2:
                 res = new Country_DstNode(port_port_journey.getCountry_Code_Src());
                 break;
             case 3:
-                res = new PortRegion_DstNode(port_port_journey.getRegion_Index_Src());
+                res = new Region_DstNode(port_port_journey.getRegion_Index_Src());
                 break;
             case 4:
-                res = new PortRegion_DstNode(port_port_journey.getWorld_port_index_number_dst());
+                res = new Port_DstNode(port_port_journey.getWorld_port_index_number_dst());
                 break;
             case 5:
                 res = new Country_DstNode(port_port_journey.getCountry_Code_Dst());
                 break;
             case 6:
-                res = new PortRegion_DstNode(port_port_journey.getWorld_port_index_number_dst());
+                res = new Region_DstNode(port_port_journey.getRegion_Index_Dst());
                 break;
             default:
                 break;

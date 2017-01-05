@@ -16,7 +16,7 @@ public class Port_Port_Journey {
     private void setTradeType()
     {
         if (getCountry_Code_Src().equals(getCountry_Code_Dst()))
-            tradeType = Query_Arg.TRADE_IN_COUNTYR; //trade in country
+            tradeType = Query_Arg.TRADE_IN_COUNTYR; //trade in code
         else
             tradeType = 2;
     }

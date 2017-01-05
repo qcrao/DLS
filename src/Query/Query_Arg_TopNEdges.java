@@ -93,31 +93,31 @@ public class Query_Arg_TopNEdges extends Query_Arg {
         switch ((srcNodeType-1)*3+dstNodeType)
         {
             case 1:
-                return new Edge(new Port_Region_Node(src_portID), new Port_Region_Node(dst_portID));
+                return new Edge(new Port_Node(src_portID), new Port_Node(dst_portID));
 
             case 2:
-                return new Edge(new Port_Region_Node(src_portID), new Country_Node(dst_countryCode));
+                return new Edge(new Port_Node(src_portID), new Country_Node(dst_countryCode));
 
             case 3:
-                return new Edge(new Port_Region_Node(src_portID), new Port_Region_Node(dst_regionID));
+                return new Edge(new Port_Node(src_portID), new Region_Node(dst_regionID));
 
             case 4:
-                return new Edge(new Country_Node(src_countryCode), new Port_Region_Node(dst_portID));
+                return new Edge(new Country_Node(src_countryCode), new Port_Node(dst_portID));
 
             case 5:
                 return new Edge(new Country_Node(src_countryCode), new Country_Node(dst_countryCode));
 
             case 6:
-                return new Edge(new Country_Node(src_countryCode), new Port_Region_Node(dst_regionID));
+                return new Edge(new Country_Node(src_countryCode), new Region_Node(dst_regionID));
 
             case 7:
-                return new Edge(new Port_Region_Node(src_regionID), new Port_Region_Node(dst_portID));
+                return new Edge(new Region_Node(src_regionID), new Port_Node(dst_portID));
 
             case 8:
-                return new Edge(new Port_Region_Node(src_regionID), new Country_Node(dst_countryCode));
+                return new Edge(new Region_Node(src_regionID), new Country_Node(dst_countryCode));
 
             case 9:
-                return new Edge(new Port_Region_Node(src_regionID), new Port_Region_Node(dst_regionID));
+                return new Edge(new Region_Node(src_regionID), new Region_Node(dst_regionID));
 
             default:
                 return null;

@@ -1,6 +1,5 @@
 package Query;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.WeakHashMap;
 
@@ -106,12 +105,33 @@ public class ThroughputTonnageOfTwoNodes {
         return res;
     }
 
+    public String getStringRes(Query_Arg_TwoNodes query_argTwoNodes)
+    {
+        long deadWeight = getRes(query_argTwoNodes);
+        String res = "";
+        if (query_argTwoNodes.getSrcPortID() != -1) res += Port_Dictionary.getPortInfo_Res(query_argTwoNodes.getSrcPortID());
+        else if (!query_argTwoNodes.getSrcCountryCode().isEmpty()) res += Port_Dictionary.getCountryInfo_Res(query_argTwoNodes.getSrcCountryCode());
+        else if (query_argTwoNodes.getSrcRegionID() != -1) res += Port_Dictionary.getRegionInfo_Res(query_argTwoNodes.getSrcRegionID());
+        else res += "empty";
+
+        res += "~";
+
+        if (query_argTwoNodes.getDstPortID() != -1) res += Port_Dictionary.getPortInfo_Res(query_argTwoNodes.getDstPortID());
+        else if (!query_argTwoNodes.getDstCountryCode().isEmpty()) res += Port_Dictionary.getCountryInfo_Res(query_argTwoNodes.getDstCountryCode());
+        else if (query_argTwoNodes.getDstRegionID() != -1) res += Port_Dictionary.getRegionInfo_Res(query_argTwoNodes.getDstRegionID());
+        else res += "empty";
+        res += "~";
+
+        res += deadWeight;
+        return res;
+
+    }
+
     public long getRes(Query_Arg_TwoNodes query_argTwoNodes)
     {
         setQuery_argTwoNodes(query_argTwoNodes);
-        //long startMili=System.currentTimeMillis();
-        long deadWeight_res = 0;
 
+        long deadWeight_res;
         //look up the cache first
         if (mp_res.containsKey(query_argTwoNodes))
         {
@@ -155,6 +175,7 @@ public class ThroughputTonnageOfTwoNodes {
         }
         //System.out.println("计算总耗时为："+(System.currentTimeMillis()-startMili)+"毫秒");
         System.out.println("res: " + deadWeight_res);
+
         return deadWeight_res;
     }
 }

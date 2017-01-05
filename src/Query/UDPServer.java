@@ -22,7 +22,7 @@ public class UDPServer
     public void init()
     {
         ShareData shareData = new ShareData();
-        System.out.println("Loading data...");
+        System.out.println("Preparing data...");
         shareData.getAll_port_port_journey();
         System.out.println("Data loaded!");
         ThroughputTonnageOfTwoNodes throughputTonnageOfTwoNodes = new ThroughputTonnageOfTwoNodes(shareData);
@@ -55,8 +55,8 @@ public class UDPServer
                     {
                         //必须这么做，防止收到不完整的参数。如果采取设置的话，那不完全的参数会导致有些没有设置
                         Query_Arg_TwoNodes query_arg_twoNodes = new Query_Arg_TwoNodes(args);
-                        Long res = throughputTonnageOfTwoNodes.getRes(query_arg_twoNodes);
-                        sendData = String.valueOf(res).getBytes();
+                        String res = throughputTonnageOfTwoNodes.getStringRes(query_arg_twoNodes);
+                        sendData = res.getBytes();
                     }
 
                     else if (args[0].equals("Query_Arg_TopNEdgesOfANode"))

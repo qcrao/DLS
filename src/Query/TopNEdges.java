@@ -1,6 +1,5 @@
 package Query;
 
-import javax.xml.soap.Node;
 import java.util.*;
 
 /**
@@ -127,7 +126,7 @@ public class TopNEdges {
     public String getStringRes(Query_Arg_TopNEdges query_arg_topNEdges)
     {
         List<Edge> res = getRes(query_arg_topNEdges);
-        String stringRes = new String();
+        String stringRes = "";
         int sz = res.size();
         stringRes += String.valueOf(sz);
         for (int i = 0; i < sz; ++i)
@@ -223,9 +222,11 @@ abstract class Node_Base
     abstract String getName();
 
 
+
+
 }
 
-class Port_Region_Node extends Node_Base
+/*class Port_Region_Node extends Node_Base
 {
     int id;
 
@@ -255,25 +256,100 @@ class Port_Region_Node extends Node_Base
                 '}';
     }
 
+    //返回港口，港口代码，港口所属国家，国家代码，地区，地区代码，经纬度
     @Override
     String getName() {
         return String.valueOf(id);
+    }
+}*/
+
+class Port_Node extends Node_Base
+{
+    int id;
+
+    public Port_Node(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Port_Node)) return false;
+
+        Port_Node that = (Port_Node) o;
+
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Port_Node{" +
+                "id=" + id +
+                '}';
+    }
+
+    //返回港口，港口代码，港口所属国家，国家代码，地区，地区代码，经纬度
+    @Override
+    String getName() {
+        return Port_Dictionary.getPortInfo_Res(id);
+    }
+}
+
+class Region_Node extends Node_Base
+{
+    int id;
+
+    public Region_Node(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Region_Node)) return false;
+
+        Region_Node that = (Region_Node) o;
+
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Region_Node{" +
+                "id=" + id +
+                '}';
+    }
+
+    //返回港口，港口代码，港口所属国家，国家代码，地区，地区代码，经纬度
+    @Override
+    String getName() {
+        return Port_Dictionary.getRegionInfo_Res(id);
     }
 }
 
 class Country_Node extends Node_Base
 {
-    String country;
+    String code;
 
     @Override
     public String toString() {
         return "Country_Node{" +
-                "country='" + country + '\'' +
+                "code='" + code + '\'' +
                 '}';
     }
 
-    public Country_Node(String country) {
-        this.country = country;
+    public Country_Node(String code) {
+        this.code = code;
     }
 
     @Override
@@ -283,16 +359,16 @@ class Country_Node extends Node_Base
 
         Country_Node that = (Country_Node) o;
 
-        return country.equals(that.country);
+        return code.equals(that.code);
     }
 
     @Override
     public int hashCode() {
-        return country.hashCode();
+        return code.hashCode();
     }
 
     @Override
     String getName() {
-        return country;
+        return Port_Dictionary.getCountryInfo_Res(code);
     }
 }

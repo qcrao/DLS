@@ -142,7 +142,7 @@ public class TopNEdgesOfANode {
     public String getStringRes(Query_Arg_TopNEdgesOfANode query_arg_topNEdgesOfANode)
     {
         List<DstNode> res = getRes(query_arg_topNEdgesOfANode);
-        String res_string = new String();
+        String res_string = "";
         int sz = res.size();
         res_string += sz + "~";
         for (int i = 0; i < sz; ++i)
@@ -251,11 +251,11 @@ abstract class DstNode implements Cloneable, Comparable<DstNode>
 
 }
 
-class PortRegion_DstNode extends DstNode
+class Region_DstNode extends DstNode
 {
     int id;
 
-    public PortRegion_DstNode(int id) {
+    public Region_DstNode(int id) {
         this.id = id;
     }
 
@@ -264,7 +264,7 @@ class PortRegion_DstNode extends DstNode
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PortRegion_DstNode that = (PortRegion_DstNode) o;
+        Region_DstNode that = (Region_DstNode) o;
 
         return id == that.id;
     }
@@ -276,12 +276,50 @@ class PortRegion_DstNode extends DstNode
 
     @Override
     String getName(Query_Arg query_arg) {
-        return String.valueOf(id);
+        return Port_Dictionary.getRegionInfo_Res(id);
     }
 
     @Override
     public String toString() {
-        return "PortRegion_DstNode{" +
+        return "Region_DstNode{" +
+                "id=" + id +
+                '}';
+    }
+
+
+}
+
+class Port_DstNode extends DstNode
+{
+    int id;
+
+    public Port_DstNode(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Port_DstNode that = (Port_DstNode) o;
+
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    String getName(Query_Arg query_arg) {
+        return Port_Dictionary.getPortInfo_Res(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Port_DstNode{" +
                 "id=" + id +
                 '}';
     }
